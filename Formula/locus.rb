@@ -4,7 +4,7 @@
 # ashlrai/homebrew-ashlr (or ashlrai/homebrew-locus). See
 # integrations/homebrew/README.md and docs/RELEASE.md.
 #
-# === v0.5.0 (this formula version) ===
+# === v0.5.0 historical release procedure ===
 # 1. Tag:  git tag -a v0.5.0 -m "Locus v0.5.0" && git push origin v0.5.0
 #    (do not force-push tags)
 # 2. Wait for .github/workflows/release.yml to attach locus-*.tar.gz assets.
@@ -70,15 +70,21 @@
 class Locus < Formula
   desc "Identity plane for coding agents — wrong account, impossible"
   homepage "https://github.com/ashlrai/locus"
-  url "https://github.com/ashlrai/locus/archive/refs/tags/v0.5.0.tar.gz"
-  version "0.5.0"
-  sha256 "296edb7b6ee41cd86201c5d4df7f832c4467455887ddca9d57da2ead710188b4"
+  url "https://github.com/ashlrai/locus/archive/refs/tags/v0.6.1.tar.gz"
+  version "0.6.1"
+  sha256 "96a93dee286ee75ad89099548045bb8f07506414a491f9dff6d3ac9d41ffefdd"
   license "MIT"
   head "https://github.com/ashlrai/locus.git", branch: "main"
 
-  # Stable source tarball (verify after publishing v0.5.0):
+  # Stable source tarball (verify after publishing v0.6.1):
   #   curl -sL "https://github.com/ashlrai/locus/archive/refs/tags/v#{version}.tar.gz" | shasum -a 256
-  # v0.5.0 asset digests:
+  # v0.6.1 asset digests (match published .sha256 sidecars):
+#   aarch64-apple-darwin: bc6c2c8280810e330c25361e5acd58084c6f9d0594e1e80a61438ec8b7dd063a
+#   x86_64-apple-darwin:  08c68076ad3729cc80948bbcc1c2b69c68b635acb3444d189c92f7ebb0aac95e
+#   x86_64-unknown-linux-gnu: 738c0ce9146207eaf87909dd15af047daf25fa700803edc9f89b6ab5ee5d2de2
+#
+# v0.5.0 source sha256 (reference): 296edb7b6ee41cd86201c5d4df7f832c4467455887ddca9d57da2ead710188b4
+# v0.5.0 asset digests (reference):
 #   aarch64-apple-darwin: fd45ec7431a730f309a4532f91356f64d6387143a7ac482fde4440d6ea5b4a79
 #   x86_64-apple-darwin:  5fcb2cf1b229dbcd57bee331df960fade17af5da528fec89913316502f2a9b6a
 #   x86_64-unknown-linux-gnu: 1ce1994a49ad8edd8c30b0e56173c7e45edf2e123002dddc279390a720e361f0
@@ -91,8 +97,8 @@ class Locus < Formula
   depends_on "rust" => :build
 
   def install
-    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/locus-cli")
-    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/locus-mcp")
+    system "cargo", "install", *std_cargo_args(path: "crates/locus-cli")
+    system "cargo", "install", *std_cargo_args(path: "crates/locus-mcp")
   end
 
   def caveats
